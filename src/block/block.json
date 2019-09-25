@@ -26,6 +26,12 @@
 			"type": "string",
 			"default": "image"
 		},
+		"customBackgroundColor": {
+			"type": "string"
+		},
+		"customTextColor": {
+			"type": "string"
+		},
 		"focalPoint": {
 			"type": "object"
 		},
@@ -35,7 +41,7 @@
 		"cardTitle": {
 			"type": "string",
 			"source": "html",
-			"selector": ".bengal-studio-card__title",
+			"selector": ".wp-block-bengal-studio-card__title",
 			"default": ""
 		}
 	}

@@ -75,7 +75,7 @@ function card_block_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'bengal-studio/card-block',
+		'bengal-studio/card',
 		[
 			// Enqueue blocks.style.build.css on both frontend & backend.
 			'style'         => 'card_block-cgb-style-css',

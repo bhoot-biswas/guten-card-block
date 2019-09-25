@@ -32,21 +32,25 @@ export default function save( { attributes } ) {
 		overlayColor,
 		url,
 		minHeight,
-		cardTitle
+		cardTitle,
+		customTextColor,
+		backgroundColor,
+		customBackgroundColor,
+		className
 	} = attributes;
 	const overlayColorClass = getColorClassName( 'background-color', overlayColor );
-	const style = backgroundType === IMAGE_BACKGROUND_TYPE ?
+	const mediaStyles = backgroundType === IMAGE_BACKGROUND_TYPE ?
 		backgroundImageStyles( url ) :
 		{};
 	if ( ! overlayColorClass ) {
-		style.backgroundColor = customOverlayColor;
+		mediaStyles.backgroundColor = customOverlayColor;
 	}
 	if ( focalPoint && ! hasParallax ) {
-		style.backgroundPosition = `${ focalPoint.x * 100 }% ${ focalPoint.y * 100 }%`;
+		mediaStyles.backgroundPosition = `${ focalPoint.x * 100 }% ${ focalPoint.y * 100 }%`;
 	}
-	style.minHeight = minHeight || undefined;
+	mediaStyles.minHeight = minHeight || undefined;
 
-	const classes = classnames(
+	const mediaClasses = classnames(
 		'wp-block-bengal-studio-card__img-top',
 		dimRatioToClass( dimRatio ),
 		overlayColorClass,
@@ -56,13 +60,26 @@ export default function save( { attributes } ) {
 		},
 	);
 
+	const backgroundClass = getColorClassName( 'background-color', backgroundColor );
+	const cardClasses = classnames(
+		{
+			className,
+			[backgroundClass]: backgroundClass
+		}
+	)
+
+	const cardStyles = {
+		backgroundColor: backgroundClass ? undefined : customBackgroundColor,
+		color: customTextColor ? customTextColor : undefined,
+	}
+
 	return (
-		<div>
+		<div className={ cardClasses ? cardClasses : undefined } style={ cardStyles }>
 			{ IMAGE_BACKGROUND_TYPE === backgroundType && (
 				<div
-					className={ classes }
+					className={ mediaClasses }
 					data-url={ url }
-					style={ style }
+					style={ mediaStyles }
 				>
 					<RichText.Content
 						tagName="h2"

@@ -227,7 +227,9 @@ class CardEdit extends Component {
 			id,
 			url,
 			minHeight,
-			cardTitle
+			cardTitle,
+			customBackgroundColor,
+			customTextColor
 		} = attributes;
 
         const onSelectMedia = ( media ) => {
@@ -386,6 +388,34 @@ class CardEdit extends Component {
 							) }
 						</PanelColorSettings>
 					) }
+					<PanelColorSettings
+						initialOpen={ false }
+						title={ __( 'Colors' ) }
+						colorSettings={[
+							{
+								label: __( 'Background Color' ),
+								value: customBackgroundColor,
+								onChange: ( nextBgColor, ...whatelse ) => {
+									setAttributes(
+										{
+											customBackgroundColor: nextBgColor
+										}
+									)
+								}
+							},
+							{
+								label: __( 'Text Color' ),
+								value: customTextColor,
+								onChange: ( nextColor, ...whatelse ) => {
+									setAttributes(
+										{
+											customTextColor: nextColor
+										}
+									)
+								}
+							}
+						]}
+					/>
 				</InspectorControls>
 			</Fragment>
 		);
@@ -413,6 +443,10 @@ class CardEdit extends Component {
                 { controls }
 				<div
 					className={ classes }
+					style={ {
+						backgroundColor: customBackgroundColor,
+						color: customTextColor,
+					} }
 				>
 					{ ! ( url || overlayColor.color ) && (
 						<MediaPlaceholder
