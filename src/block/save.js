@@ -32,11 +32,13 @@ export default function save( { attributes } ) {
 		overlayColor,
 		url,
 		minHeight,
+		showTitle,
 		cardTitle,
 		customTextColor,
 		backgroundColor,
 		customBackgroundColor,
-		className
+		className,
+		mediaPosition,
 	} = attributes;
 	const overlayColorClass = getColorClassName( 'background-color', overlayColor );
 	const mediaStyles = backgroundType === IMAGE_BACKGROUND_TYPE ?
@@ -62,9 +64,10 @@ export default function save( { attributes } ) {
 
 	const backgroundClass = getColorClassName( 'background-color', backgroundColor );
 	const cardClasses = classnames(
+		className,
 		{
-			className,
-			[backgroundClass]: backgroundClass
+			[backgroundClass]: backgroundClass,
+			[ `wp-block-bengal-studio-card--media-position-${ mediaPosition }` ]: true,
 		}
 	)
 
@@ -81,11 +84,13 @@ export default function save( { attributes } ) {
 					data-url={ url }
 					style={ mediaStyles }
 				>
-					<RichText.Content
-						tagName="h2"
-						value={ cardTitle }
-						className="wp-block-bengal-studio-card__title"
-					/>
+					{ showTitle && (
+						<RichText.Content
+							tagName="h2"
+							value={ cardTitle }
+							className="wp-block-bengal-studio-card__title"
+						/>
+					) }
 				</div>
 			) }
 			{ VIDEO_BACKGROUND_TYPE === backgroundType && url && ( <video

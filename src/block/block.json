@@ -38,11 +38,19 @@
 		"minHeight": {
 			"type": "number"
 		},
+		"showTitle": {
+			"type": "boolean",
+			"default": true
+		},
 		"cardTitle": {
 			"type": "string",
 			"source": "html",
 			"selector": ".wp-block-bengal-studio-card__title",
 			"default": ""
+		},
+		"mediaPosition": {
+			"type": "string",
+			"default": "center"
 		}
 	}
 }

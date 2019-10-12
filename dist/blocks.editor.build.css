@@ -53,6 +53,18 @@
   max-width: 600;
   width: 100%; }
 
+@media (min-width: 992px) {
+  .wp-block-bengal-studio-card-image--media-position-left .wp-block-bengal-studio-card__img-top, .wp-block-bengal-studio-card-image--media-position-right .wp-block-bengal-studio-card__img-top,
+  .wp-block-bengal-studio-card--media-position-left .wp-block-bengal-studio-card__img-top,
+  .wp-block-bengal-studio-card--media-position-right .wp-block-bengal-studio-card__img-top {
+    width: 200px;
+    -ms-flex-order: 1;
+        order: 1; }
+  .wp-block-bengal-studio-card-image--media-position-right .components-resizable-box__container,
+  .wp-block-bengal-studio-card--media-position-right .components-resizable-box__container {
+    -ms-flex-order: 2;
+        order: 2; } }
+
 .block-library-bengal-studio-card__reset-button {
   margin-left: auto; }
 

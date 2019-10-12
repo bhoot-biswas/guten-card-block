@@ -57,6 +57,22 @@
 		max-width: $content-width / 2;
 		width: 100%;
 	}
+
+	@include media-breakpoint-up(lg) {
+		&--media-position-left,
+        &--media-position-right {
+			.wp-block-bengal-studio-card__img-top {
+				width: 200px;
+				order: 1;
+			}
+        }
+
+        &--media-position-right {
+            .components-resizable-box__container {
+                order: 2;
+            }
+        }
+    }
 }
 
 .block-library-bengal-studio-card__reset-button {

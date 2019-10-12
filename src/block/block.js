@@ -47,6 +47,9 @@ registerBlockType( name, {
 		__( 'create-guten-block' ),
 	],
     attributes,
+    supports: {
+		align: [ 'wide' ], // Support Wide and Full alignment controls
+	},
     edit,
     save,
 } );

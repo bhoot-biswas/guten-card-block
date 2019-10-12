@@ -19,6 +19,7 @@
         position: relative;
         z-index: 2;
         color: $white;
+        word-break: break-all;
     }
 
     &__img-top {
@@ -75,5 +76,26 @@
         min-height: 1px;
         padding: $card-spacer-x;
         color: $card-color;
+    }
+
+    @include media-breakpoint-up(lg) {
+        &--media-position-left,
+        &--media-position-right {
+            flex-direction: row;
+
+            .wp-block-bengal-studio-card__img-top {
+                width: 30%;
+            }
+        }
+
+        &--media-position-right {
+            .wp-block-bengal-studio-card__img-top {
+                order: 2;
+            }
+
+            .wp-block-bengal-studio-card__inner-container {
+                order: 1;
+            }
+        }
     }
 }

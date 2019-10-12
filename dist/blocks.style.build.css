@@ -24,7 +24,8 @@
   .wp-block-bengal-studio-card__title {
     position: relative;
     z-index: 2;
-    color: #f4f4f4; }
+    color: #f4f4f4;
+    word-break: break-all; }
   .wp-block-bengal-studio-card__img-top {
     position: relative;
     min-height: 250px;
@@ -80,3 +81,15 @@
         flex: 1 1 auto;
     min-height: 1px;
     padding: 1.25rem; }
+  @media (min-width: 992px) {
+    .wp-block-bengal-studio-card--media-position-left, .wp-block-bengal-studio-card--media-position-right {
+      -ms-flex-direction: row;
+          flex-direction: row; }
+      .wp-block-bengal-studio-card--media-position-left .wp-block-bengal-studio-card__img-top, .wp-block-bengal-studio-card--media-position-right .wp-block-bengal-studio-card__img-top {
+        width: 30%; }
+    .wp-block-bengal-studio-card--media-position-right .wp-block-bengal-studio-card__img-top {
+      -ms-flex-order: 2;
+          order: 2; }
+    .wp-block-bengal-studio-card--media-position-right .wp-block-bengal-studio-card__inner-container {
+      -ms-flex-order: 1;
+          order: 1; } }

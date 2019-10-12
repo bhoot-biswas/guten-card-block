@@ -61,7 +61,7 @@ import {
  * Module Constants
  */
 const ALLOWED_MEDIA_TYPES = [ 'image', 'video' ];
-const ALLOWED_BLOCKS = [ 'core/button', 'core/paragraph' ];
+const ALLOWED_BLOCKS = [ 'core/button', 'core/paragraph', 'core/heading', 'core/columns' ];
 const INNER_BLOCKS_TEMPLATE = [
 	[ 'core/paragraph', {
 		placeholder: __( 'Write description…' ),
@@ -227,9 +227,11 @@ class CardEdit extends Component {
 			id,
 			url,
 			minHeight,
+			showTitle,
 			cardTitle,
 			customBackgroundColor,
-			customTextColor
+			customTextColor,
+			mediaPosition,
 		} = attributes;
 
         const onSelectMedia = ( media ) => {
@@ -293,9 +295,29 @@ class CardEdit extends Component {
 			style.backgroundPosition = `${ focalPoint.x * 100 }% ${ focalPoint.y * 100 }%`;
 		}
 
+		const toolbarControls = [ {
+			icon: 'align-pull-left',
+			title: __( 'Show media on left' ),
+			isActive: mediaPosition === 'left',
+			onClick: () => setAttributes( { mediaPosition: 'left' } ),
+		}, {
+			icon: 'align-center',
+			title: __( 'Show media on center' ),
+			isActive: mediaPosition === 'center',
+			onClick: () => setAttributes( { mediaPosition: 'center' } ),
+		}, {
+			icon: 'align-pull-right',
+			title: __( 'Show media on right' ),
+			isActive: mediaPosition === 'right',
+			onClick: () => setAttributes( { mediaPosition: 'right' } ),
+		} ];
+
         const controls = (
 			<Fragment>
 				<BlockControls>
+					<Toolbar
+						controls={ toolbarControls }
+					/>
 					{ !! ( url || overlayColor.color ) && (
 						<Fragment>
 							<MediaUploadCheck>
@@ -386,6 +408,11 @@ class CardEdit extends Component {
 									required
 								/>
 							) }
+							<ToggleControl
+	                            label={ __( 'Show Title' ) }
+	                            checked={ !! showTitle }
+	                            onChange={ ( showTitle ) => setAttributes( { showTitle } ) }
+	                        />
 						</PanelColorSettings>
 					) }
 					<PanelColorSettings
@@ -424,7 +451,10 @@ class CardEdit extends Component {
 		const label = __( 'Media area' );
 
         const classes = classnames(
-			className
+			className,
+			{
+				[ `wp-block-bengal-studio-card--media-position-${ mediaPosition }` ]: true,
+			}
 		);
 
 		const imageBackgroundClasses = classnames(
@@ -512,13 +542,15 @@ class CardEdit extends Component {
 									src={ url }
 								/>
 
-								<RichText
-									tagName="h2"
-									className="wp-block-bengal-studio-card__title"
-									value={ cardTitle }
-									onChange={ ( cardTitle ) => setAttributes( { cardTitle } ) }
-									placeholder={ __( 'Title for This Block' ) }
-								/>
+								{ showTitle && (
+									<RichText
+										tagName="h2"
+										className="wp-block-bengal-studio-card__title"
+										value={ cardTitle }
+										onChange={ ( cardTitle ) => setAttributes( { cardTitle } ) }
+										placeholder={ __( 'Title for This Block' ) }
+									/>
+								) }
 							</div>
 						</ResizableCover>
 					) }
